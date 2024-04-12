@@ -34,7 +34,6 @@
         <div id="myfirstchart" style="height:250px;"></div>
       </div>
     </div>
-
   </div>
 </div>
 <?php include 'inc/footer.php'; ?>

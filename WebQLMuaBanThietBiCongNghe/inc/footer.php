@@ -54,6 +54,13 @@
 		</div>
 	</div>
 </div>
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+  intent="WELCOME"
+  chat-title="TE-AI-Test"
+  agent-id="99bb348f-793b-4051-9a60-b604d5bc9f97"
+  language-code="en"
+></df-messenger>
 <script type="text/javascript">
 	$(document).ready(function() {
 		/*
