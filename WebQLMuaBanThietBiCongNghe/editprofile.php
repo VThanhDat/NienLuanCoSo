@@ -21,13 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
         <div class="section group">
             <div class="content_top">
                 <div class="heading">
-                    <h3>Update Profile Customers</h3>
+                    <h3>Cập nhật thông tin cá nhân</h3>
                 </div>
                 <div class="clear"></div>
             </div>
             <form action="" method="post">
                 <table class="tblone">
-                    <tr>
+                    <!-- <tr>
                         <td colspan="2">
                             <?php
                             if (isset($updateUser)) {
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
                             }
                             ?>
                         </td>
-                    </tr>
+                    </tr> -->
                     <?php
                     $id = Session::get('userId');
                     $get_users = $user->show_users($id);
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
                         while ($result = $get_users->fetch_assoc()) {
                     ?>
                             <tr>
-                                <td>Name</td>
+                                <td>Họ và tên</td>
                                 <td>:</td>
                                 <td><input type="text" name="name" value="<?php echo $result['fullname'] ?>"></td>
                             </tr>
@@ -53,18 +53,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
                                 <td><input type="email" name="email" value="<?php echo $result['email'] ?>"></td>
                             </tr>
                             <tr>
-                                <td>Date of birth</td>
+                                <td>Ngày sinh</td>
                                 <td>:</td>
                                 <td><input type="date" name="dob" value="<?php echo $result['dob'] ?>"></td>
                             </tr>
                             <tr>
-                                <td>Address</td>
+                                <td>Địa chỉ</td>
                                 <td>:</td>
                                 <td><input type="textarea" name="address" value="<?php echo $result['address'] ?>"></td>
-
                             </tr>
                             <tr>
-                                <td colspan="3"><input type="submit" name="save" value="Save"></td>
+                                <td colspan="3"><input type="submit" name="save" value="Lưu"></td>
                             </tr>
                     <?php
                         }
@@ -75,7 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
         </div>
     </div>
 </div>
-
 
 <?php
 include 'inc/footer.php';

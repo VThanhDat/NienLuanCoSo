@@ -198,7 +198,7 @@ include 'inc/slider.php';
 				$half_visible = floor($visible_pages / 2);
 
 				if ($current_page > 1) {
-					echo '<a style="margin:0 5px" href="index.php?trang=' . ($current_page - 1) . '">Previous</a>';
+					echo '<a style="margin:0 5px" href="index.php?trang=' . ($current_page - 1) . '">Trước</a>';
 				}
 
 				for ($i = 1; $i <= $product_button; $i++) {
@@ -210,7 +210,7 @@ include 'inc/slider.php';
 				}
 
 				if ($current_page < $product_button) {
-					echo '<a style="margin:0 5px" href="index.php?trang=' . ($current_page + 1) . '">Next</a>';
+					echo '<a style="margin:0 5px" href="index.php?trang=' . ($current_page + 1) . '">Tiếp</a>';
 				}
 				?>
 			</div>

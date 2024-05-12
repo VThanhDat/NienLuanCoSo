@@ -327,7 +327,7 @@ if (isset($_POST['binhluan_submit'])) {
 								$half_visible = floor($visible_pages / 2);
 
 								if ($current_page > 1) {
-									echo '<a style="margin:0 5px" href="details.php?proid=' . $id . '&pagecomment=' . ($current_page - 1) . '">Previous</a>';
+									echo '<a style="margin:0 5px" href="details.php?proid=' . $id . '&pagecomment=' . ($current_page - 1) . '">Trước</a>';
 								}
 
 								for ($i = 1; $i <= $comment_button; $i++) {
@@ -339,7 +339,7 @@ if (isset($_POST['binhluan_submit'])) {
 								}
 
 								if ($current_page < $comment_button) {
-									echo '<a style="margin:0 5px" href="details.php?proid=' . $id . '&pagecomment=' . ($current_page + 1) . '">Next</a>';
+									echo '<a style="margin:0 5px" href="details.php?proid=' . $id . '&pagecomment=' . ($current_page + 1) . '">Tiếp</a>';
 								}
 							}
 							?>

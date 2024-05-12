@@ -104,7 +104,7 @@ include 'inc/header.php';
 				$filter_params = isset($_GET['price_from']) && isset($_GET['price_to']) ? '&price_from=' . $_GET['price_from'] . '&price_to=' . $_GET['price_to'] : '';
 
 				if ($current_page > 1) {
-					echo '<a style="margin:0 5px" href="products.php?pageproducts=' . ($current_page - 1) . $filter_params . '">Previous</a>';
+					echo '<a style="margin:0 5px" href="products.php?pageproducts=' . ($current_page - 1) . $filter_params . '">Trước</a>';
 				}
 
 				for ($i = 1; $i <= $product_button; $i++) {
@@ -116,7 +116,7 @@ include 'inc/header.php';
 				}
 
 				if ($current_page < $product_button) {
-					echo '<a style="margin:0 5px" href="products.php?pageproducts=' . ($current_page + 1) . $filter_params . '">Next</a>';
+					echo '<a style="margin:0 5px" href="products.php?pageproducts=' . ($current_page + 1) . $filter_params . '">Tiếp</a>';
 				}
 				?>
 			</div>

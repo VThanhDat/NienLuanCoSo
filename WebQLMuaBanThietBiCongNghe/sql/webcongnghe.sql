@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 20, 2024 lúc 04:31 AM
+-- Thời gian đã tạo: Th5 09, 2024 lúc 08:01 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -42,7 +42,8 @@ CREATE TABLE `tbl_binhluan` (
 INSERT INTO `tbl_binhluan` (`binhluan_id`, `user_id`, `tenbinhluan`, `binhluan`, `product_id`) VALUES
 (1, 1, 'Đạt', 'Sản phẩm okie', 1),
 (3, 1, 'Đạt', 'Máy ảnh chất lượng mọi người nên mua', 4),
-(4, 3, 'Linh', 'Máy ảnh okie', 4);
+(4, 3, 'Linh', 'Máy ảnh okie', 4),
+(5, 1, 'Đạt', 'Đẹp quá', 9);
 
 -- --------------------------------------------------------
 
@@ -185,7 +186,7 @@ CREATE TABLE `tbl_compare` (
 
 CREATE TABLE `tbl_order` (
   `id` int(11) NOT NULL,
-  `productId` varchar(255) NOT NULL,
+  `productId` int(11) NOT NULL,
   `productName` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
@@ -201,15 +202,17 @@ CREATE TABLE `tbl_order` (
 --
 
 INSERT INTO `tbl_order` (`id`, `productId`, `productName`, `user_id`, `quantity`, `price`, `image`, `date_order`, `paymentMethod`, `order_code`) VALUES
-(84, '4', 'Máy ảnh Cannon', 1, 10, '1000', '43f9b85f2b.jpg', '2024-01-21 21:12:44', 'offline', '6394'),
-(85, '10', 'Tivi', 6, 1, '1500', '91f49a00b8.jpg', '2024-02-20 11:38:18', 'momo_wallet', '2743'),
-(91, '8', 'Áo đen tây', 1, 1, '2200', 'ff292f5007.jpg', '2024-02-20 14:50:22', 'offline', '3097'),
-(92, '10', 'Tivi', 6, 3, '1500', '91f49a00b8.jpg', '2024-02-20 14:58:26', 'offline', '6874'),
-(93, '8', 'Áo đen tây', 6, 2, '2200', 'ff292f5007.jpg', '2024-02-20 15:02:19', 'offline', '1382'),
-(94, '2', 'Iphone 5', 1, 15, '2000', 'f13818c57c.png', '2024-02-20 15:34:51', 'offline', '3528'),
-(95, '10', 'Tivi', 1, 3, '1500', '91f49a00b8.jpg', '2024-02-20 15:55:48', 'offline', '4482'),
-(96, '10', 'Tivi', 1, 2, '1500', '91f49a00b8.jpg', '2024-02-20 15:59:44', 'offline', '4856'),
-(97, '1', 'Laptop Samsung', 1, 5, '1500', 'dbde6663aa.jpg', '2024-03-07 19:29:40', 'offline', '5041');
+(84, 4, 'Máy ảnh Cannon', 1, 10, '1000', '43f9b85f2b.jpg', '2024-01-21 21:12:44', 'offline', '6394'),
+(85, 10, 'Tivi', 6, 1, '1500', '91f49a00b8.jpg', '2024-02-20 11:38:18', 'momo_wallet', '2743'),
+(91, 8, 'Áo đen tây', 1, 1, '2200', 'ff292f5007.jpg', '2024-02-20 14:50:22', 'offline', '3097'),
+(92, 10, 'Tivi', 6, 3, '1500', '91f49a00b8.jpg', '2024-02-20 14:58:26', 'offline', '6874'),
+(93, 8, 'Áo đen tây', 6, 2, '2200', 'ff292f5007.jpg', '2024-02-20 15:02:19', 'offline', '1382'),
+(94, 2, 'Iphone 5', 1, 15, '2000', 'f13818c57c.png', '2024-02-20 15:34:51', 'offline', '3528'),
+(95, 10, 'Tivi', 1, 3, '1500', '91f49a00b8.jpg', '2024-02-20 15:55:48', 'offline', '4482'),
+(96, 10, 'Tivi', 1, 2, '1500', '91f49a00b8.jpg', '2024-02-20 15:59:44', 'offline', '4856'),
+(97, 1, 'Laptop Samsung', 1, 5, '1500', 'dbde6663aa.jpg', '2024-03-07 19:29:40', 'offline', '5041'),
+(98, 10, 'Tivi', 18, 1, '1500', '91f49a00b8.jpg', '2024-03-20 04:02:34', 'offline', '6774'),
+(99, 4, 'Máy ảnh Cannon', 18, 3, '1000', '43f9b85f2b.jpg', '2024-03-20 04:05:58', 'momo_wallet', '3846');
 
 -- --------------------------------------------------------
 
@@ -230,7 +233,6 @@ CREATE TABLE `tbl_placed` (
 --
 
 INSERT INTO `tbl_placed` (`id_placed`, `order_code`, `status`, `user_id`, `date_created`) VALUES
-(33, '6394', 2, 1, '2024-01-21'),
 (34, '2743', 2, 6, '2024-02-20'),
 (36, '3097', 2, 1, '2024-02-20'),
 (37, '6874', 2, 6, '2024-02-20'),
@@ -238,7 +240,9 @@ INSERT INTO `tbl_placed` (`id_placed`, `order_code`, `status`, `user_id`, `date_
 (39, '3528', 2, 1, '2024-02-20'),
 (40, '4482', 2, 1, '2024-02-20'),
 (41, '4856', 2, 1, '2024-02-20'),
-(42, '5041', 0, 1, '2024-03-08');
+(42, '5041', 0, 1, '2024-03-08'),
+(43, '6774', 2, 18, '2024-03-20'),
+(44, '3846', 1, 18, '2024-03-20');
 
 -- --------------------------------------------------------
 
@@ -266,14 +270,34 @@ CREATE TABLE `tbl_product` (
 
 INSERT INTO `tbl_product` (`productId`, `productName`, `product_quantity`, `product_soldcount`, `product_remain`, `catId`, `brandId`, `product_desc`, `type`, `price`, `image`) VALUES
 (1, 'Laptop Samsung', 10, 0, 10, 1, 2, '<p>Đẹp rẻ</p>', 1, '1500', 'dbde6663aa.jpg'),
-(2, 'Iphone 5', 15, 15, 0, 3, 4, '<p>sản phẩm</p>', 0, '2000', 'f13818c57c.png'),
 (4, 'Máy ảnh Cannon', 20, 10, 10, 5, 1, '<p>Bền rẻ</p>', 1, '1000', '43f9b85f2b.jpg'),
 (5, 'Máy ảnh Cannon 2', 10, 0, 10, 5, 4, '<p>Rẻ đẹp</p>', 0, '1500', '58c54eaed9.png'),
 (6, 'Camera SealPea', 0, 0, 0, 5, 2, '<p>Đẹp xịn</p>', 1, '1500', 'e68b27b91e.jpg'),
-(7, 'Áo xám ', 10, 0, 10, 4, 4, '<p>Đẹp rẻ</p>', 0, '2100', '617dd9e3f5.jpg'),
-(8, 'Áo đen tây', 10, 3, 7, 4, 4, '<p>Gọn g&agrave;n</p>', 1, '2200', 'ff292f5007.jpg'),
-(9, 'Áo đen tây nam', 10, 0, 10, 5, 4, '<p>Đẹp rẻ</p>', 1, '2400', '93ca9f6ac8.jpg'),
-(10, 'Tivi', 10, 9, 1, 4, 2, '<p>Đẹp rẻ</p>', 1, '1500', '91f49a00b8.jpg');
+(10, 'Tivi', 10, 10, 0, 4, 2, '<p>Đẹp rẻ</p>', 1, '1500', '91f49a00b8.jpg'),
+(14, 'Iphone 14 Pro Max Đen', 10, 0, 10, 3, 4, '<p>Sang trọng,...</p>', 1, '2000', '4c30ad8316.jpg'),
+(15, 'Iphone 14 Pro Max Tím', 30, 0, 30, 3, 4, '<p>Sang trọng,...</p>', 1, '2500', '082a2f9f5d.webp'),
+(16, 'Iphone 14 Pro Max Vàng', 15, 0, 15, 3, 4, '<p>Sang trọng,....</p>', 1, '2000', 'e765a65013.jpg'),
+(17, 'Iphone 14 Plus Max Trắng', 50, 0, 50, 3, 4, '<p>Sang trọng,...</p>', 1, '2000', '6851adc319.webp'),
+(18, 'Iphone 14 Plus Max Đỏ', 10, 0, 10, 3, 4, '<p>T&iacute;m phong c&aacute;ch,...</p>', 1, '2100', '14118903ec.webp'),
+(19, 'Iphone 14 Plus ', 10, 0, 10, 3, 4, '<p>Xanh dương bao đẹp,...</p>', 1, '2300', 'eddfb984e4.webp'),
+(20, 'Iphone 14 Pro Max Đen', 25, 0, 25, 3, 4, '<p>Đen qu&yacute; ph&aacute;i</p>', 1, '2300', 'f309340d2d.webp'),
+(21, 'Iphone 14 Plus Max Hồng', 20, 0, 20, 3, 4, '<p>Hồng nhẹ nh&agrave;ng</p>', 1, '2500', '1da3095172.webp'),
+(22, 'RouterWifi Acer', 15, 0, 15, 2, 1, '<p>Khoảng c&aacute;ch xa</p>', 0, '1000', 'f3ddb6a282.jpg'),
+(23, 'RouterWifi samsung', 10, 0, 10, 2, 2, '<p>Lần đầu xuất hiện tr&ecirc;n thị trường</p>', 0, '1200', 'd39451a407.jpg'),
+(24, 'RouterWifi Oppo', 10, 0, 10, 2, 3, '<p>M&agrave;u trắng sang trọng ph&ugrave; hợp với nhiều nh&agrave;</p>', 1, '1300', '81bd4eb84d.jpg'),
+(25, 'RouterWifi Apple', 10, 0, 10, 2, 4, '<p>Bao xịn</p>', 0, '1500', '1e9779e666.jpg'),
+(26, 'TiVi Acer', 10, 0, 10, 4, 1, '<p>Nhẹ rẻ khỏe</p>', 0, '2000', '5133aa996f.jpg'),
+(27, 'TiVi Apple', 10, 0, 10, 4, 4, '<p>Mới ra mắt v&agrave;o năm 2024</p>', 1, '2400', '6bf6df14cf.jpg'),
+(28, 'TiVi Oppo', 15, 0, 15, 4, 3, '<p>Sản phẩm đến từ nh&agrave; Oppo</p>', 0, '2200', 'e11657993a.jpg'),
+(29, 'TiVi Samsung', 20, 0, 20, 4, 2, '<p>Chất lượng đi đ&ocirc;i với số lượng</p>', 1, '2500', '528c6700b5.jpg'),
+(30, 'Maxbook Pro ME864', 15, 0, 15, 1, 4, '<p>Maxbook một sản phẩm nổi tiếng từ nh&agrave; Apple</p>', 1, '3000', '5733e4581d.jpg'),
+(31, 'Book Pro Samsung', 10, 0, 10, 1, 2, '<p>Si&ecirc;u đỉnh</p>', 1, '2500', 'af5dfa4f27.png'),
+(32, 'Pad 2 Oppo', 10, 0, 10, 1, 3, '<p>Giả laptop</p>', 0, '2300', '7709c732c7.jpg'),
+(33, 'Aspire 3 Acer', 10, 0, 10, 1, 1, '<p>D&agrave;nh cho c&aacute;c game thủ</p>', 0, '2700', '5d7ea28f37.jpg'),
+(34, 'Camera 8K Apple', 10, 0, 10, 5, 4, '<p>Qu&aacute; đ&atilde;</p>\r\n<div id=\"gtx-trans\" style=\"position: absolute; left: 7px; top: 20.5556px;\">&nbsp;</div>', 1, '2100', '40eef876c6.jpeg'),
+(35, 'Camera acer', 10, 0, 10, 5, 1, '<p>D&agrave;nh cho game thủ</p>', 0, '2300', '4246f0d1fa.jpg'),
+(36, 'Camera Oppo', 20, 0, 20, 5, 3, '<p>Oppo sản xuất camera :))</p>', 1, '2500', 'b0b96ab7ad.jpg'),
+(37, 'Camera Samsung', 10, 0, 10, 5, 2, '<p>độc lạ chưa từng c&oacute;</p>', 0, '3000', '18007f8bef.jpg');
 
 -- --------------------------------------------------------
 
@@ -296,7 +320,8 @@ INSERT INTO `tbl_rating` (`id`, `rating`, `product_id`, `user_id`) VALUES
 (27, 5, 6, 1),
 (28, 5, 6, 3),
 (29, 3, 6, 6),
-(32, 5, 4, 1);
+(32, 5, 4, 1),
+(33, 5, 9, 1);
 
 -- --------------------------------------------------------
 
@@ -336,9 +361,9 @@ CREATE TABLE `tbl_slider` (
 --
 
 INSERT INTO `tbl_slider` (`slider_id`, `sliderName`, `slider_image`, `type`) VALUES
-(1, 'Slider1', '29217c586c.jpg', 1),
 (2, 'Slider2', '1c6e3624a6.jpg', 1),
-(3, 'Slider3', '7e8810dd64.jpg', 1);
+(4, 'WinnerBigSale', '785120be6b.png', 1),
+(5, 'Promax14', '4aef4b2399.png', 1);
 
 -- --------------------------------------------------------
 
@@ -359,7 +384,8 @@ CREATE TABLE `tbl_thongke` (
 
 INSERT INTO `tbl_thongke` (`id_thongke`, `doanhthu`, `soluong`, `date_thongke`) VALUES
 (18, '11000', 10, '2024-01-21'),
-(19, '79310', 37, '2024-02-20');
+(19, '79310', 37, '2024-02-20'),
+(20, '1650', 1, '2024-03-20');
 
 -- --------------------------------------------------------
 
@@ -375,6 +401,14 @@ CREATE TABLE `tbl_wishlist` (
   `price` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `tbl_wishlist`
+--
+
+INSERT INTO `tbl_wishlist` (`id`, `user_id`, `productId`, `productName`, `price`, `image`) VALUES
+(3, 1, 9, 'Áo đen tây nam', '2400', '93ca9f6ac8.jpg'),
+(4, 18, 10, 'Tivi', '1500', '91f49a00b8.jpg');
 
 -- --------------------------------------------------------
 
@@ -405,7 +439,9 @@ INSERT INTO `users` (`id`, `email`, `fullname`, `dob`, `password`, `role_id`, `a
 (6, 'khunglong@gmail.com', 'Huu Tai', '2024-01-06', 'e10adc3949ba59abbe56e057f20f883e', 2, 'Can Tho', 1, '53004'),
 (10, 'khunglong123@gmail.com', 'Huu Tai ', '2024-01-03', 'e10adc3949ba59abbe56e057f20f883e', 2, 'Can Tho ', 1, '53002'),
 (13, 'xinhxinh123@gmail.com', 'Xinh xinh', '2024-01-04', 'e10adc3949ba59abbe56e057f20f883e', 1, 'Can Tho', 1, '53238'),
-(15, 'xinhxan@gmail.com', 'Xinh xan', '2024-01-05', 'e10adc3949ba59abbe56e057f20f883e', 3, 'Can Tho , NK', 1, '79779');
+(15, 'xinhxan@gmail.com', 'Xinh xan', '2024-01-05', 'e10adc3949ba59abbe56e057f20f883e', 3, 'Can Tho , NK', 1, '79779'),
+(18, 'huulinh12@gmail.com', 'Huu Linh', '2024-03-01', 'e10adc3949ba59abbe56e057f20f883e', 2, 'Can Tho', 1, '29533'),
+(20, 'duongphamminh2408@gmail.com', 'Phạm Đương', '2024-04-01', 'e10adc3949ba59abbe56e057f20f883e', 2, 'Cần Thơ', 1, '22354');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -516,7 +552,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `tbl_binhluan`
 --
 ALTER TABLE `tbl_binhluan`
-  MODIFY `binhluan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `binhluan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_blog`
@@ -534,7 +570,7 @@ ALTER TABLE `tbl_brand`
 -- AUTO_INCREMENT cho bảng `tbl_cart`
 --
 ALTER TABLE `tbl_cart`
-  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
+  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_category`
@@ -552,31 +588,31 @@ ALTER TABLE `tbl_category_post`
 -- AUTO_INCREMENT cho bảng `tbl_compare`
 --
 ALTER TABLE `tbl_compare`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_order`
 --
 ALTER TABLE `tbl_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_placed`
 --
 ALTER TABLE `tbl_placed`
-  MODIFY `id_placed` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id_placed` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_product`
 --
 ALTER TABLE `tbl_product`
-  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_rating`
 --
 ALTER TABLE `tbl_rating`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_role`
@@ -588,25 +624,25 @@ ALTER TABLE `tbl_role`
 -- AUTO_INCREMENT cho bảng `tbl_slider`
 --
 ALTER TABLE `tbl_slider`
-  MODIFY `slider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `slider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_thongke`
 --
 ALTER TABLE `tbl_thongke`
-  MODIFY `id_thongke` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_thongke` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_wishlist`
 --
 ALTER TABLE `tbl_wishlist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

@@ -54,13 +54,54 @@
 		</div>
 	</div>
 </div>
-<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<!-- Chatbot -->
+<div class="chat-container" id="chat-container">
+    <div id="chat-history"></div>
+    <form id="chat-form">
+        <input type="text" id="user-input" autocomplete="off" placeholder="Type your message...">
+        <button type="submit">Send</button>
+    </form>
+</div>
+
+<div class="chat-icon" id="chat-icon">
+    <button><img src="../images/chat-bot-icon.svg" alt=""></button>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#chat-icon').click(function () {
+            $('#chat-container').toggleClass('show');
+        });
+
+        $('#chat-form').submit(function (e) {
+            e.preventDefault();
+            var message = $('#user-input').val().trim();
+            if (message !== '') {
+                $('#chat-history').append('<div class="user-message">' + message + '</div>');
+                $('#user-input').val('');
+                $.ajax({
+                    url: 'http://127.0.0.1:8000/get_response',  // Đường dẫn API của Flask
+                    method: 'POST',
+                    data: {message: message},
+                    success: function (data) {
+                        $('#chat-history').append('<div class="bot-message">' + data.response + '</div>');
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+
+<!-- <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
 <df-messenger
   intent="WELCOME"
   chat-title="TE-AI-Test"
   agent-id="99bb348f-793b-4051-9a60-b604d5bc9f97"
-  language-code="en"
-></df-messenger>
+  language-code="en">
+</df-messenger> -->
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		/*

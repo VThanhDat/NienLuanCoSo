@@ -14,7 +14,7 @@ if ($login_check == false) {
         <div class="section group">
             <div class="content_top">
                 <div class="heading">
-                    <h3>Profile Customers</h3>
+                    <h3>Thông tin tài khoản</h3>
                 </div>
                 <div class="clear"></div>
             </div>
@@ -27,7 +27,7 @@ if ($login_check == false) {
                         while($result = $get_users->fetch_assoc()){
                 ?>
                 <tr>
-                    <td>Name</td>
+                    <td>Họ và tên</td>
                     <td>:</td>
                     <td><?php echo $result['fullname']?></td>
                 </tr>
@@ -37,17 +37,23 @@ if ($login_check == false) {
                     <td><?php echo $result['email']?></td>
                 </tr>
                 <tr>
-                    <td>Date of birth</td>
+                    <td>Ngày sinh</td>
                     <td>:</td>
                     <td><?php echo $result['dob']?></td>
                 </tr>
                 <tr>
-                    <td>Address</td>
+                    <td>Địa chỉ</td>
                     <td>:</td>
                     <td><?php echo $result['address']?></td>
                 </tr>
                 <tr>
-                    <td colspan="3"><a href="editprofile.php">Update Profile</a></td>
+                    <td>Mật khẩu</td>
+                    <td>:</td>
+                    <td><input type="password" name="password" value="<?php echo $result['password'] ?>"></td>
+                    </tr>
+                <tr>
+                    <td colspan="2"><a href="editprofile.php">Cập nhật thông tin cá nhân</a></td>
+                    <td colspan="2"><a href="editpassword.php">Đổi mật khẩu</a></td>
                 </tr>
                 <?php 
                     }

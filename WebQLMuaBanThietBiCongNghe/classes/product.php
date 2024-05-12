@@ -52,8 +52,8 @@ class product
             // If the product doesn't exist, proceed with the insertion
             move_uploaded_file($file_temp, $uploaded_image);
 
-            $query = "INSERT INTO tbl_product(productName,product_quantity, brandId, catId, product_desc, price, type, image) 
-                VALUES('$productName','$product_quantity','$brand','$category','$product_desc','$price','$type','$unique_image')";
+            $query = "INSERT INTO tbl_product(productName,product_quantity,product_remain, brandId, catId, product_desc, price, type, image) 
+                VALUES('$productName','$product_quantity','$product_quantity','$brand','$category','$product_desc','$price','$type','$unique_image')";
             $result = $this->db->insert($query);
             if ($result) {
                 $alert = "<span class='success'>Insert Product Successfully</span>";
@@ -372,8 +372,8 @@ class product
         } else {
             if (!empty($file_name)) {
                 // Nếu người dùng chọn ảnh
-                if ($file_size > 40480) {
-                    $alert = "<span class='success'>Image Size should be less then 40MB!</span>";
+                if ($file_size > 200000) {
+                    $alert = "<span class='success'>Image Size should be less then 200MB!</span>";
                     return $alert;
                 } else if (in_array($file_ext, $permited) === false) {
                     $alert = "<span class='success'>You can upload only:-" . implode(', ', $permited) . "</span>";

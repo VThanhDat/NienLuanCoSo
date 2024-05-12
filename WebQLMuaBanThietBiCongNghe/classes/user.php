@@ -175,19 +175,54 @@ class user
 		$email = mysqli_real_escape_string($this->db->link, $data['email']);
 		$dob = mysqli_real_escape_string($this->db->link, $data['dob']);
 		$address = mysqli_real_escape_string($this->db->link, $data['address']);
+		
 
 		if ($name == "" || $email == "" || $dob == "" || $address == "") {
-			$alert = "<span class ='error'>Fields must be not empty</span>";
+			$alert = "<span class ='error'>Fields must not be empty</span>";
 			return $alert;
 		} else {
 			$query = "UPDATE users SET fullname='$name', email='$email', dob='$dob', address='$address' WHERE id='$id'";
 			$result = $this->db->update($query);
 			if ($result) {
-				$alert = "<span class ='success'>Update Profile Customers Successfully</span>";
-				return $alert;
+				// Hiển thị thông báo thành công và chuyển hướng đến trang profile
+				echo "<script>alert('Update Profile Customers Successfully');window.location.href = 'profile.php';</script>";
 			} else {
-				$alert = "<span class ='error'>Update Profile Customers Not Successfully</span>";
-				return $alert;
+				// Hiển thị thông báo lỗi
+				echo "<span class ='error'>Update Profile Customers Not Successful</span>";
+			}
+		}
+	}
+
+	public function update_password($data, $id)
+	{
+		$password_cu = mysqli_real_escape_string($this->db->link, md5($data['password_cu']));
+		$password_moi = mysqli_real_escape_string($this->db->link, md5($data['password_moi']));
+		$password_nhaplai = mysqli_real_escape_string($this->db->link, md5($data['password_nhaplai']));
+
+		if ($password_cu == "" || $password_moi == "" || $password_nhaplai == "") {
+			$alert = "<span class ='error'>Fields must not be empty</span>";
+			return $alert;
+		} elseif ($password_moi != $password_nhaplai) {
+			$alert = "<span class ='error'>New passwords do not match</span>";
+			return $alert;
+		} else {
+			// Kiểm tra mật khẩu cũ
+			$query = "SELECT * FROM users WHERE id='$id' AND password='$password_cu'";
+			$result = $this->db->select($query);
+			if ($result) {
+				// Cập nhật mật khẩu mới
+				$query_update = "UPDATE users SET password='$password_moi' WHERE id='$id'";
+				$result_update = $this->db->update($query_update);
+				if ($result_update) {
+					// Hiển thị thông báo thành công và chuyển hướng đến trang profile
+					echo "<script>alert('Update Password Successfully');window.location.href = 'profile.php';</script>";
+				} else {
+					// Hiển thị thông báo lỗi
+					echo "<span class ='error'>Update Password Not Successful</span>";
+				}
+			} else {
+				// Hiển thị thông báo lỗi khi mật khẩu cũ không chính xác
+				echo "<span class ='error'>Incorrect current password</span>";
 			}
 		}
 	}
