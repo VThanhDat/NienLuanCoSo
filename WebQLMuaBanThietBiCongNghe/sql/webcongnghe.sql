@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 09, 2024 lúc 08:01 PM
--- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.2.12
+-- Host: localhost:3306
+-- Generation Time: Sep 26, 2024 at 03:08 AM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,25 +18,60 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `webcongnghe`
+-- Database: `webcongnghe`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tbl_binhluan`
+-- Table structure for table `chatbot`
+--
+
+CREATE TABLE `chatbot` (
+  `id` int NOT NULL,
+  `tag` varchar(255) NOT NULL,
+  `patterns` varchar(255) NOT NULL,
+  `responses` varchar(255) NOT NULL,
+  `context` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `chatbot`
+--
+
+INSERT INTO `chatbot` (`id`, `tag`, `patterns`, `responses`, `context`) VALUES
+(1, 'greeting', 'Hi there\", \"How are you\", \"Is anyone there?\", \"Hey\", \"Hola\", \"Hello\", \"Good day', 'Hello, thanks for asking\", \"Good to see you again\", \"Hi there, how can I help?', ''),
+(2, 'goodbye', 'Bye\", \"See you later\", \"Goodbye\", \"Nice chatting to you, bye\", \"Till next time', 'See you!\", \"Have a nice day\", \"Bye! Come back again soon.', ''),
+(3, 'thanks', 'Thanks\", \"Thank you\", \"That\'s helpful\", \"Awesome, thanks\", \"Thanks for helping me', 'Happy to help!\", \"Any time!\", \"My pleasure', ''),
+(4, 'noanswer', '[]', 'Sorry, can\'t understand you\", \"Please give me more info\", \"Not sure I understand', ''),
+(5, 'options', 'How you could help me?\", \"What you can do?\", \"What help you provide?\", \"How you can be helpful?\", \"What support is offered', 'I can guide you through Adverse drug reaction list, Blood pressure tracking, Hospitals and Pharmacies\", \"Offering support for Adverse drug reaction, Blood pressure, Hospitals and Pharmacies', ''),
+(6, 'adverse_drug', 'How to check Adverse drug reaction?\", \"Open adverse drugs module\", \"Give me a list of drugs causing adverse behavior\", \"List all drugs suitable for patient with adverse reaction\", \"Which drugs dont have adverse reaction?', 'Navigating to Adverse drug reaction module', ''),
+(7, 'blood_pressure', 'Open blood pressure module\", \"Task related to blood pressure\", \"Blood pressure data entry\", \"I want to log blood pressure results\", \"Blood pressure data management', 'Navigating to Blood Pressure module', ''),
+(8, 'blood_pressure_search', 'I want to search for blood pressure result history\", \"Blood pressure for patient\", \"Load patient blood pressure result\", \"Show blood pressure results for patient\", \"Find blood pressure results by ID', 'Please provide Patient ID\", \"Patient ID?', 'search_blood_pressure_by_patient_id'),
+(9, 'search_blood_pressure_by_patient_id', '[]', 'Loading Blood pressure result for Patient', ''),
+(10, 'pharmacy_search', 'Find me a pharmacy\", \"Find pharmacy\", \"List of pharmacies nearby\", \"Locate pharmacy\", \"Search pharmacy', 'Please provide pharmacy name', 'search_pharmacy_by_name'),
+(11, 'search_pharmacy_by_name', '[]', 'Loading pharmacy details', ''),
+(12, 'hospital_search', 'Lookup for hospital\", \"Searching for hospital to transfer patient\", \"I want to search hospital data\", \"Hospital lookup for patient\", \"Looking up hospital details', 'Please provide hospital name or location', 'search_hospital_by_params'),
+(13, 'search_hospital_by_params', '[]', 'Please provide hospital type', 'search_hospital_by_type'),
+(14, 'search_hospital_by_type', '[]', 'Loading hospital details', ''),
+(15, 'action_danhmucsanpham', 'Các thương hiệu sản phẩm nào?', 'Có 4 thương hiệu trong cửa hàng đó là Acer, Samsung, Oppo, Apple.', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_binhluan`
 --
 
 CREATE TABLE `tbl_binhluan` (
-  `binhluan_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `tenbinhluan` varchar(255) NOT NULL,
-  `binhluan` varchar(255) NOT NULL,
-  `product_id` int(11) NOT NULL
+  `binhluan_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `tenbinhluan` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `binhluan` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `product_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `tbl_binhluan`
+-- Dumping data for table `tbl_binhluan`
 --
 
 INSERT INTO `tbl_binhluan` (`binhluan_id`, `user_id`, `tenbinhluan`, `binhluan`, `product_id`) VALUES
@@ -48,21 +83,21 @@ INSERT INTO `tbl_binhluan` (`binhluan_id`, `user_id`, `tenbinhluan`, `binhluan`,
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tbl_blog`
+-- Table structure for table `tbl_blog`
 --
 
 CREATE TABLE `tbl_blog` (
-  `id` int(11) NOT NULL,
-  `title_blog` varchar(255) NOT NULL,
-  `desc_blog` mediumtext NOT NULL,
-  `content` text NOT NULL,
-  `id_cate_post` int(11) NOT NULL,
-  `image` varchar(200) NOT NULL,
-  `status` int(11) NOT NULL
+  `id` int NOT NULL,
+  `title_blog` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `desc_blog` mediumtext COLLATE utf8mb4_general_ci NOT NULL,
+  `content` text COLLATE utf8mb4_general_ci NOT NULL,
+  `id_cate_post` int NOT NULL,
+  `image` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `status` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `tbl_blog`
+-- Dumping data for table `tbl_blog`
 --
 
 INSERT INTO `tbl_blog` (`id`, `title_blog`, `desc_blog`, `content`, `id_cate_post`, `image`, `status`) VALUES
@@ -81,16 +116,16 @@ INSERT INTO `tbl_blog` (`id`, `title_blog`, `desc_blog`, `content`, `id_cate_pos
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tbl_brand`
+-- Table structure for table `tbl_brand`
 --
 
 CREATE TABLE `tbl_brand` (
-  `brandId` int(11) NOT NULL,
-  `brandName` varchar(255) NOT NULL
+  `brandId` int NOT NULL,
+  `brandName` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `tbl_brand`
+-- Dumping data for table `tbl_brand`
 --
 
 INSERT INTO `tbl_brand` (`brandId`, `brandName`) VALUES
@@ -102,34 +137,34 @@ INSERT INTO `tbl_brand` (`brandId`, `brandName`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tbl_cart`
+-- Table structure for table `tbl_cart`
 --
 
 CREATE TABLE `tbl_cart` (
-  `cartId` int(11) NOT NULL,
-  `productId` int(11) NOT NULL,
-  `sId` varchar(255) NOT NULL,
-  `productName` varchar(255) NOT NULL,
-  `price` varchar(255) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `stock` int(11) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT 0
+  `cartId` int NOT NULL,
+  `productId` int NOT NULL,
+  `sId` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `productName` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `price` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `quantity` int NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `stock` int NOT NULL,
+  `status` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tbl_category`
+-- Table structure for table `tbl_category`
 --
 
 CREATE TABLE `tbl_category` (
-  `catId` int(11) NOT NULL,
-  `catName` varchar(255) NOT NULL
+  `catId` int NOT NULL,
+  `catName` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `tbl_category`
+-- Dumping data for table `tbl_category`
 --
 
 INSERT INTO `tbl_category` (`catId`, `catName`) VALUES
@@ -142,18 +177,18 @@ INSERT INTO `tbl_category` (`catId`, `catName`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tbl_category_post`
+-- Table structure for table `tbl_category_post`
 --
 
 CREATE TABLE `tbl_category_post` (
-  `id_cate_post` int(11) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `desc_post` text NOT NULL,
-  `status` int(11) NOT NULL
+  `id_cate_post` int NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `desc_post` text COLLATE utf8mb4_general_ci NOT NULL,
+  `status` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `tbl_category_post`
+-- Dumping data for table `tbl_category_post`
 --
 
 INSERT INTO `tbl_category_post` (`id_cate_post`, `title`, `desc_post`, `status`) VALUES
@@ -166,39 +201,39 @@ INSERT INTO `tbl_category_post` (`id_cate_post`, `title`, `desc_post`, `status`)
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tbl_compare`
+-- Table structure for table `tbl_compare`
 --
 
 CREATE TABLE `tbl_compare` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `productId` int(11) NOT NULL,
-  `productName` varchar(255) NOT NULL,
-  `price` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `productId` int NOT NULL,
+  `productName` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `price` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tbl_order`
+-- Table structure for table `tbl_order`
 --
 
 CREATE TABLE `tbl_order` (
-  `id` int(11) NOT NULL,
-  `productId` int(11) NOT NULL,
-  `productName` varchar(255) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `price` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `date_order` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `paymentMethod` varchar(11) NOT NULL,
-  `order_code` varchar(20) NOT NULL
+  `id` int NOT NULL,
+  `productId` int NOT NULL,
+  `productName` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `user_id` int NOT NULL,
+  `quantity` int NOT NULL,
+  `price` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `date_order` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `paymentMethod` varchar(11) COLLATE utf8mb4_general_ci NOT NULL,
+  `order_code` varchar(20) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `tbl_order`
+-- Dumping data for table `tbl_order`
 --
 
 INSERT INTO `tbl_order` (`id`, `productId`, `productName`, `user_id`, `quantity`, `price`, `image`, `date_order`, `paymentMethod`, `order_code`) VALUES
@@ -217,19 +252,19 @@ INSERT INTO `tbl_order` (`id`, `productId`, `productName`, `user_id`, `quantity`
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tbl_placed`
+-- Table structure for table `tbl_placed`
 --
 
 CREATE TABLE `tbl_placed` (
-  `id_placed` int(11) NOT NULL,
-  `order_code` varchar(20) NOT NULL,
-  `status` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `id_placed` int NOT NULL,
+  `order_code` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `status` int NOT NULL,
+  `user_id` int NOT NULL,
   `date_created` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `tbl_placed`
+-- Dumping data for table `tbl_placed`
 --
 
 INSERT INTO `tbl_placed` (`id_placed`, `order_code`, `status`, `user_id`, `date_created`) VALUES
@@ -247,25 +282,25 @@ INSERT INTO `tbl_placed` (`id_placed`, `order_code`, `status`, `user_id`, `date_
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tbl_product`
+-- Table structure for table `tbl_product`
 --
 
 CREATE TABLE `tbl_product` (
-  `productId` int(11) NOT NULL,
-  `productName` tinytext NOT NULL,
-  `product_quantity` int(11) NOT NULL,
-  `product_soldcount` int(50) NOT NULL DEFAULT 0,
-  `product_remain` int(50) NOT NULL,
-  `catId` int(11) NOT NULL,
-  `brandId` int(11) NOT NULL,
-  `product_desc` text NOT NULL,
-  `type` int(11) NOT NULL,
-  `price` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL
+  `productId` int NOT NULL,
+  `productName` tinytext COLLATE utf8mb4_general_ci NOT NULL,
+  `product_quantity` int NOT NULL,
+  `product_soldcount` int NOT NULL DEFAULT '0',
+  `product_remain` int NOT NULL,
+  `catId` int NOT NULL,
+  `brandId` int NOT NULL,
+  `product_desc` text COLLATE utf8mb4_general_ci NOT NULL,
+  `type` int NOT NULL,
+  `price` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `tbl_product`
+-- Dumping data for table `tbl_product`
 --
 
 INSERT INTO `tbl_product` (`productId`, `productName`, `product_quantity`, `product_soldcount`, `product_remain`, `catId`, `brandId`, `product_desc`, `type`, `price`, `image`) VALUES
@@ -302,18 +337,18 @@ INSERT INTO `tbl_product` (`productId`, `productName`, `product_quantity`, `prod
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tbl_rating`
+-- Table structure for table `tbl_rating`
 --
 
 CREATE TABLE `tbl_rating` (
-  `id` int(11) NOT NULL,
-  `rating` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
+  `id` int NOT NULL,
+  `rating` int NOT NULL,
+  `product_id` int NOT NULL,
+  `user_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `tbl_rating`
+-- Dumping data for table `tbl_rating`
 --
 
 INSERT INTO `tbl_rating` (`id`, `rating`, `product_id`, `user_id`) VALUES
@@ -326,16 +361,16 @@ INSERT INTO `tbl_rating` (`id`, `rating`, `product_id`, `user_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tbl_role`
+-- Table structure for table `tbl_role`
 --
 
 CREATE TABLE `tbl_role` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL
+  `id` int NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `tbl_role`
+-- Dumping data for table `tbl_role`
 --
 
 INSERT INTO `tbl_role` (`id`, `name`) VALUES
@@ -346,18 +381,18 @@ INSERT INTO `tbl_role` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tbl_slider`
+-- Table structure for table `tbl_slider`
 --
 
 CREATE TABLE `tbl_slider` (
-  `slider_id` int(11) NOT NULL,
-  `sliderName` varchar(255) NOT NULL,
-  `slider_image` varchar(255) NOT NULL,
-  `type` int(11) NOT NULL
+  `slider_id` int NOT NULL,
+  `sliderName` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `slider_image` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `type` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `tbl_slider`
+-- Dumping data for table `tbl_slider`
 --
 
 INSERT INTO `tbl_slider` (`slider_id`, `sliderName`, `slider_image`, `type`) VALUES
@@ -368,18 +403,18 @@ INSERT INTO `tbl_slider` (`slider_id`, `sliderName`, `slider_image`, `type`) VAL
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tbl_thongke`
+-- Table structure for table `tbl_thongke`
 --
 
 CREATE TABLE `tbl_thongke` (
-  `id_thongke` int(11) NOT NULL,
-  `doanhthu` varchar(50) NOT NULL,
-  `soluong` int(11) NOT NULL,
+  `id_thongke` int NOT NULL,
+  `doanhthu` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `soluong` int NOT NULL,
   `date_thongke` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `tbl_thongke`
+-- Dumping data for table `tbl_thongke`
 --
 
 INSERT INTO `tbl_thongke` (`id_thongke`, `doanhthu`, `soluong`, `date_thongke`) VALUES
@@ -390,20 +425,20 @@ INSERT INTO `tbl_thongke` (`id_thongke`, `doanhthu`, `soluong`, `date_thongke`) 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tbl_wishlist`
+-- Table structure for table `tbl_wishlist`
 --
 
 CREATE TABLE `tbl_wishlist` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `productId` int(11) NOT NULL,
-  `productName` varchar(255) NOT NULL,
-  `price` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `productId` int NOT NULL,
+  `productName` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `price` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `tbl_wishlist`
+-- Dumping data for table `tbl_wishlist`
 --
 
 INSERT INTO `tbl_wishlist` (`id`, `user_id`, `productId`, `productName`, `price`, `image`) VALUES
@@ -413,23 +448,23 @@ INSERT INTO `tbl_wishlist` (`id`, `user_id`, `productId`, `productName`, `price`
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `fullname` varchar(255) NOT NULL,
+  `id` int NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `fullname` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `dob` date NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `role_id` int(11) NOT NULL,
-  `address` varchar(500) NOT NULL,
-  `isConfirmed` tinyint(4) NOT NULL,
-  `captcha` varchar(50) NOT NULL
+  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `role_id` int NOT NULL,
+  `address` varchar(500) COLLATE utf8mb4_general_ci NOT NULL,
+  `isConfirmed` tinyint NOT NULL,
+  `captcha` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `email`, `fullname`, `dob`, `password`, `role_id`, `address`, `isConfirmed`, `captcha`) VALUES
@@ -444,215 +479,227 @@ INSERT INTO `users` (`id`, `email`, `fullname`, `dob`, `password`, `role_id`, `a
 (20, 'duongphamminh2408@gmail.com', 'Phạm Đương', '2024-04-01', 'e10adc3949ba59abbe56e057f20f883e', 2, 'Cần Thơ', 1, '22354');
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `tbl_binhluan`
+-- Indexes for table `chatbot`
+--
+ALTER TABLE `chatbot`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_binhluan`
 --
 ALTER TABLE `tbl_binhluan`
   ADD PRIMARY KEY (`binhluan_id`);
 
 --
--- Chỉ mục cho bảng `tbl_blog`
+-- Indexes for table `tbl_blog`
 --
 ALTER TABLE `tbl_blog`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `tbl_brand`
+-- Indexes for table `tbl_brand`
 --
 ALTER TABLE `tbl_brand`
   ADD PRIMARY KEY (`brandId`);
 
 --
--- Chỉ mục cho bảng `tbl_cart`
+-- Indexes for table `tbl_cart`
 --
 ALTER TABLE `tbl_cart`
   ADD PRIMARY KEY (`cartId`);
 
 --
--- Chỉ mục cho bảng `tbl_category`
+-- Indexes for table `tbl_category`
 --
 ALTER TABLE `tbl_category`
   ADD PRIMARY KEY (`catId`);
 
 --
--- Chỉ mục cho bảng `tbl_category_post`
+-- Indexes for table `tbl_category_post`
 --
 ALTER TABLE `tbl_category_post`
   ADD PRIMARY KEY (`id_cate_post`);
 
 --
--- Chỉ mục cho bảng `tbl_compare`
+-- Indexes for table `tbl_compare`
 --
 ALTER TABLE `tbl_compare`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `tbl_order`
+-- Indexes for table `tbl_order`
 --
 ALTER TABLE `tbl_order`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `tbl_placed`
+-- Indexes for table `tbl_placed`
 --
 ALTER TABLE `tbl_placed`
   ADD PRIMARY KEY (`id_placed`);
 
 --
--- Chỉ mục cho bảng `tbl_product`
+-- Indexes for table `tbl_product`
 --
 ALTER TABLE `tbl_product`
   ADD PRIMARY KEY (`productId`);
 
 --
--- Chỉ mục cho bảng `tbl_rating`
+-- Indexes for table `tbl_rating`
 --
 ALTER TABLE `tbl_rating`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `tbl_role`
+-- Indexes for table `tbl_role`
 --
 ALTER TABLE `tbl_role`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `tbl_slider`
+-- Indexes for table `tbl_slider`
 --
 ALTER TABLE `tbl_slider`
   ADD PRIMARY KEY (`slider_id`);
 
 --
--- Chỉ mục cho bảng `tbl_thongke`
+-- Indexes for table `tbl_thongke`
 --
 ALTER TABLE `tbl_thongke`
   ADD PRIMARY KEY (`id_thongke`);
 
 --
--- Chỉ mục cho bảng `tbl_wishlist`
+-- Indexes for table `tbl_wishlist`
 --
 ALTER TABLE `tbl_wishlist`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD KEY `role_id` (`role_id`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `tbl_binhluan`
+-- AUTO_INCREMENT for table `chatbot`
+--
+ALTER TABLE `chatbot`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `tbl_binhluan`
 --
 ALTER TABLE `tbl_binhluan`
-  MODIFY `binhluan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `binhluan_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT cho bảng `tbl_blog`
+-- AUTO_INCREMENT for table `tbl_blog`
 --
 ALTER TABLE `tbl_blog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT cho bảng `tbl_brand`
+-- AUTO_INCREMENT for table `tbl_brand`
 --
 ALTER TABLE `tbl_brand`
-  MODIFY `brandId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `brandId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT cho bảng `tbl_cart`
+-- AUTO_INCREMENT for table `tbl_cart`
 --
 ALTER TABLE `tbl_cart`
-  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
+  MODIFY `cartId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
 
 --
--- AUTO_INCREMENT cho bảng `tbl_category`
+-- AUTO_INCREMENT for table `tbl_category`
 --
 ALTER TABLE `tbl_category`
-  MODIFY `catId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `catId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT cho bảng `tbl_category_post`
+-- AUTO_INCREMENT for table `tbl_category_post`
 --
 ALTER TABLE `tbl_category_post`
-  MODIFY `id_cate_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_cate_post` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT cho bảng `tbl_compare`
+-- AUTO_INCREMENT for table `tbl_compare`
 --
 ALTER TABLE `tbl_compare`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT cho bảng `tbl_order`
+-- AUTO_INCREMENT for table `tbl_order`
 --
 ALTER TABLE `tbl_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
--- AUTO_INCREMENT cho bảng `tbl_placed`
+-- AUTO_INCREMENT for table `tbl_placed`
 --
 ALTER TABLE `tbl_placed`
-  MODIFY `id_placed` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id_placed` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
--- AUTO_INCREMENT cho bảng `tbl_product`
+-- AUTO_INCREMENT for table `tbl_product`
 --
 ALTER TABLE `tbl_product`
-  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `productId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
--- AUTO_INCREMENT cho bảng `tbl_rating`
+-- AUTO_INCREMENT for table `tbl_rating`
 --
 ALTER TABLE `tbl_rating`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
--- AUTO_INCREMENT cho bảng `tbl_role`
+-- AUTO_INCREMENT for table `tbl_role`
 --
 ALTER TABLE `tbl_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT cho bảng `tbl_slider`
+-- AUTO_INCREMENT for table `tbl_slider`
 --
 ALTER TABLE `tbl_slider`
-  MODIFY `slider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `slider_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT cho bảng `tbl_thongke`
+-- AUTO_INCREMENT for table `tbl_thongke`
 --
 ALTER TABLE `tbl_thongke`
-  MODIFY `id_thongke` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_thongke` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT cho bảng `tbl_wishlist`
+-- AUTO_INCREMENT for table `tbl_wishlist`
 --
 ALTER TABLE `tbl_wishlist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT cho bảng `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `users`
+-- Constraints for table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `tbl_role` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `tbl_role` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -64,7 +64,7 @@
 </div>
 
 <div class="chat-icon" id="chat-icon">
-    <button><img src="../images/chat-bot-icon.svg" alt=""></button>
+    <button><img src="../images/chat-bot-icon.svg" ></button>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
