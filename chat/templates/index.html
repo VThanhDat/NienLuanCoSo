@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <div class="nav-container">
+        <nav>
+            <h1>ChatBot</h1>
+        </nav>
+    </div>
+
+    <div class="chat-container" id="chat-container">
+        <div id="chat-history"></div>
+        <form id="chat-form">
+            <input type="text" id="user-input" autocomplete="off" placeholder="Type your message...">
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    
+    <div class="chat-icon" id="chat-icon">
+        <button><img src="{{ url_for('static', filename='images/chat-bot-icon.svg') }}" alt=""></button>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#chat-form').submit(function (e) {
+                e.preventDefault();
+                var message = $('#user-input').val().trim();
+                if (message !== '') {
+                    $('#chat-history').append('<div class="user-message">' + message + '</div>');
+                    $('#user-input').val('');
+                    $.ajax({
+                        url: '/get_response', // Địa chỉ API của Flask
+                        method: 'POST',
+                        data: {message: message},
+                        success: function (data) {
+                            $('#chat-history').append('<div class="bot-message">' + data.response + '</div>');
+                        }
+                    });
+                }
+            });
+        });
+        </script>
+        
+    
+</body>
+
+</html>
