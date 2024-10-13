@@ -63,12 +63,12 @@
     </form>
 </div>
 
-<div class="chat-icon" id="chat-icon">
+<!-- <div class="chat-icon" id="chat-icon">
     <button><img src="../images/chat-bot-icon.svg" ></button>
-</div>
+</div> -->
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+<!-- <script>
     $(document).ready(function () {
         $('#chat-icon').click(function () {
             $('#chat-container').toggleClass('show');
@@ -91,7 +91,7 @@
             }
         });
     });
-</script>
+</script> -->
 
 
 <!-- <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
