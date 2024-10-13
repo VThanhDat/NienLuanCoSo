@@ -589,14 +589,19 @@ class product
             // Lấy kết quả từ truy vấn
             $row = $result->fetch_assoc();
             $totalOrders = $row['total_quantity_orders'];
-    
+            
+            // Nếu $totalOrders là NULL hoặc rỗng, gán giá trị mặc định là 0
+            if (empty($totalOrders)) {
+                $totalOrders = 0;
+            }
+        
             // Cập nhật số lượng sản phẩm đã bán và số lượng sản phẩm còn lại
             $query_update = "UPDATE tbl_product 
                             SET product_soldcount = '$totalOrders',
                                 product_remain = (product_quantity - product_soldcount)
                             WHERE productId = '$id'";
             $updateResult = $this->db->update($query_update);
-    
+        
             if ($updateResult) {
                 // Trả về số lượng sản phẩm đã bán
                 return $totalOrders;
