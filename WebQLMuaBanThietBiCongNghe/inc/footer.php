@@ -283,6 +283,8 @@
 		}
 	}
 </script>
+<!-- BOOTSTRAP SCRIPTS  -->
+<script src="../js/bootstrap.js"></script>
 </body>
 
 </html>
